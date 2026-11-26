@@ -1,0 +1,2261 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foxtrot — Artisanal Bistro, Grill & Cafe | Dhaka</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            foxtrot: {
+              DEFAULT: '#D94E28',
+              hover: '#BE3F1C',
+              light: '#FDF3F0',
+              dark: '#2A1610',
+            },
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    /* Custom scrollbar for sleek feel */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(156, 163, 175, 0.35);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(217, 78, 40, 0.6);
+    }
+    .glass-nav {
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    @keyframes shakeError {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+    .animate-shake {
+      animation: shakeError 0.35s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-[#F7F7F5] text-[#141518] dark:bg-[#0F1115] dark:text-[#F3F4F6] transition-colors duration-300 antialiased selection:bg-[#D94E28] selection:text-white">
+
+  <!-- Toast Notification Container -->
+  <div id="toast-box" class="fixed bottom-6 right-6 z-[100] pointer-events-none flex flex-col gap-2"></div>
+
+  <!-- =====================================================================
+       PAGE 1: INDEX.HTML (CUSTOMER SINGLE-PAGE LANDING PAGE)
+       ===================================================================== -->
+  <div id="page-index" class="min-h-screen flex flex-col">
+
+    <!-- Sticky Glassmorphic Navbar -->
+    <header class="sticky top-0 z-40 glass-nav bg-white/85 dark:bg-[#0F1115]/85 border-b border-stone-200/80 dark:border-gray-800/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+        <!-- Foxtrot Brand Logo -->
+        <a href="#index.html" onclick="navigateTo('index.html', event)" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-2xl bg-[#D94E28] text-white flex items-center justify-center shadow-lg shadow-[#D94E28]/25 group-hover:scale-105 transition-transform">
+            <!-- Custom Geometric Fox-Flame SVG -->
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L4 7v6c0 5.5 3.8 9.2 8 10 4.2-.8 8-4.5 8-10V7l-8-5z" fill="currentColor" fill-opacity="0.15"/>
+              <path d="M8 9l4 4 4-4"/>
+              <path d="M12 13v6"/>
+            </svg>
+          </div>
+          <div>
+            <span class="text-xl font-extrabold tracking-tight block leading-none">Foxtrot</span>
+            <span class="text-[11px] font-medium tracking-widest uppercase text-[#D94E28]">Bistro &amp; Grill</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-stone-600 dark:text-gray-300">
+          <a href="#menu-section" class="hover:text-[#D94E28] transition-colors">Menu</a>
+          <a href="#combos-section" class="hover:text-[#D94E28] transition-colors">Signature Combos</a>
+          <a href="#reviews-section" class="hover:text-[#D94E28] transition-colors">Reviews</a>
+          <a href="#location-section" class="hover:text-[#D94E28] transition-colors">Location</a>
+        </nav>
+
+        <!-- Right Action Controls -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <!-- Dark/Light Mode Toggle (Inline SVG for instant offline/local rendering) -->
+          <button
+            type="button"
+            onclick="toggleTheme()"
+            aria-label="Toggle Dark Mode"
+            class="p-2 sm:p-2.5 rounded-xl bg-stone-100 dark:bg-[#181B20] text-stone-700 dark:text-gray-200 hover:bg-stone-200 dark:hover:bg-gray-800 border border-stone-200/70 dark:border-gray-800 transition-colors"
+          >
+            <svg class="w-4 h-4 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+            </svg>
+            <svg class="w-4 h-4 hidden dark:block text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+            </svg>
+          </button>
+
+          <!-- Live Cart Button (Inline SVG for instant offline/local rendering) -->
+          <button
+            type="button"
+            onclick="toggleCartDrawer(true)"
+            class="relative p-2 sm:p-2.5 rounded-xl bg-stone-100 dark:bg-[#181B20] text-stone-800 dark:text-gray-100 hover:bg-stone-200 dark:hover:bg-gray-800 border border-stone-200/70 dark:border-gray-800 transition-colors"
+            aria-label="Open Cart"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+              <path d="M3 6h18"/>
+              <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            <span
+              id="nav-cart-badge"
+              class="absolute -top-1.5 -right-1.5 min-w-[20px] h-5 px-1 rounded-full bg-[#D94E28] text-white text-[11px] font-bold flex items-center justify-center shadow"
+            >0</span>
+          </button>
+
+          <!-- Direct Link to dashboard.html (Always visible on both Mobile and Desktop) -->
+          <a
+            href="#dashboard.html"
+            onclick="navigateTo('dashboard.html', event)"
+            class="inline-flex items-center gap-1 px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-[#141518] dark:bg-white text-white dark:text-[#141518] hover:bg-[#D94E28] dark:hover:bg-[#D94E28] dark:hover:text-white transition-all shadow-sm whitespace-nowrap"
+          >
+            <span class="sm:hidden">Dashboard</span>
+            <span class="hidden sm:inline">Admin Dashboard</span>
+            <span class="text-xs">↗</span>
+          </a>
+
+          <!-- Mobile Hamburger Menu Button -->
+          <button
+            id="mobile-menu-btn"
+            type="button"
+            onclick="toggleMobileNav()"
+            aria-label="Toggle Navigation Menu"
+            aria-expanded="false"
+            class="md:hidden p-2 rounded-xl bg-stone-100 dark:bg-[#181B20] text-stone-800 dark:text-gray-100 hover:bg-stone-200 dark:hover:bg-gray-800 border border-stone-200/70 dark:border-gray-800 transition-colors"
+          >
+            <svg id="icon-menu-open" class="w-5 h-5 block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <svg id="icon-menu-close" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Collapsible Mobile Navigation Drawer -->
+      <div
+        id="mobile-nav-menu"
+        class="hidden md:hidden border-t border-stone-200/80 dark:border-gray-800/80 bg-white dark:bg-[#0F1115] px-4 py-4 shadow-2xl"
+      >
+        <nav class="flex flex-col space-y-1.5 text-sm font-bold text-stone-700 dark:text-gray-200">
+          <a
+            href="#menu-section"
+            onclick="toggleMobileNav(false)"
+            class="px-4 py-3 rounded-xl hover:bg-stone-100 dark:hover:bg-[#181B20] hover:text-[#D94E28] transition-colors flex items-center justify-between"
+          >
+            <span>Menu</span>
+            <span class="text-xs text-stone-400">→</span>
+          </a>
+          <a
+            href="#combos-section"
+            onclick="toggleMobileNav(false)"
+            class="px-4 py-3 rounded-xl hover:bg-stone-100 dark:hover:bg-[#181B20] hover:text-[#D94E28] transition-colors flex items-center justify-between"
+          >
+            <span>Signature Combos</span>
+            <span class="text-xs text-stone-400">→</span>
+          </a>
+          <a
+            href="#reviews-section"
+            onclick="toggleMobileNav(false)"
+            class="px-4 py-3 rounded-xl hover:bg-stone-100 dark:hover:bg-[#181B20] hover:text-[#D94E28] transition-colors flex items-center justify-between"
+          >
+            <span>Reviews</span>
+            <span class="text-xs text-stone-400">→</span>
+          </a>
+          <a
+            href="#location-section"
+            onclick="toggleMobileNav(false)"
+            class="px-4 py-3 rounded-xl hover:bg-stone-100 dark:hover:bg-[#181B20] hover:text-[#D94E28] transition-colors flex items-center justify-between"
+          >
+            <span>Location</span>
+            <span class="text-xs text-stone-400">→</span>
+          </a>
+          <div class="pt-2 border-t border-stone-200/70 dark:border-gray-800/70">
+            <a
+              href="#dashboard.html"
+              onclick="navigateTo('dashboard.html', event)"
+              class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#D94E28] hover:bg-[#BE3F1C] text-white text-sm font-bold transition-colors shadow-sm"
+            >
+              <span>Admin Dashboard</span>
+              <span class="text-xs">↗</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Editorial Hero Section -->
+    <section class="relative pt-10 pb-16 sm:pt-16 sm:pb-24 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          <!-- Left Editorial Copy -->
+          <div class="lg:col-span-6 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white dark:bg-[#181B20] border border-stone-200 dark:border-gray-800 shadow-xs text-xs sm:text-sm font-semibold">
+              <span class="text-amber-500">4.9 ★</span>
+              <span class="text-stone-700 dark:text-gray-300">(1,450+ Dhaka Diners)</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#D94E28]"></span>
+              <span class="text-[#D94E28]">Banani Flagship</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12]">
+              Bold Flavors, <span class="text-[#D94E28]">Crafted Fire</span> &amp; Modern Dining.
+            </h1>
+
+            <p class="text-base sm:text-lg text-stone-600 dark:text-gray-400 leading-relaxed max-w-xl">
+              Modern flavors, wood-fired charcoal grills, and refined hospitality — Banani’s artisanal bistro serving prime steaks, truffle risottos, and craft coolers delivered hot across Dhaka in 40 minutes.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 pt-2">
+              <a
+                href="#menu-section"
+                class="px-7 py-3.5 rounded-2xl bg-[#D94E28] hover:bg-[#BE3F1C] text-white font-bold text-sm sm:text-base shadow-lg shadow-[#D94E28]/25 transition-all inline-flex items-center gap-2"
+              >
+                <span>Order Online</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+              <a
+                href="#combos-section"
+                class="px-7 py-3.5 rounded-2xl bg-white dark:bg-[#181B20] hover:bg-stone-100 dark:hover:bg-gray-800 text-stone-900 dark:text-white font-bold text-sm sm:text-base border border-stone-200 dark:border-gray-800 transition-all"
+              >
+                Explore Menu
+              </a>
+            </div>
+
+            <!-- Key Highlights -->
+            <div class="grid grid-cols-3 gap-4 pt-6 border-t border-stone-200/80 dark:border-gray-800/80 max-w-lg">
+              <div>
+                <p class="text-xl sm:text-2xl font-extrabold">35–40m</p>
+                <p class="text-xs text-stone-500 dark:text-gray-400 mt-0.5">Hot Foil Delivery</p>
+              </div>
+              <div>
+                <p class="text-xl sm:text-2xl font-extrabold">100%</p>
+                <p class="text-xs text-stone-500 dark:text-gray-400 mt-0.5">Wood-Fired Grill</p>
+              </div>
+              <div>
+                <p class="text-xl sm:text-2xl font-extrabold text-[#D94E28]">FOXTROT20</p>
+                <p class="text-xs text-stone-500 dark:text-gray-400 mt-0.5">20% First Order</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right High-Contrast Culinary Visual -->
+          <div class="lg:col-span-6">
+            <div class="relative rounded-3xl overflow-hidden bg-stone-900 shadow-2xl border border-stone-200/60 dark:border-gray-800 aspect-[4/3]">
+              <img
+                src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=85"
+                alt="Foxtrot Signature Wood-Fired Ribeye Steak"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                class="w-full h-full object-cover object-center"
+              />
+              <!-- Graceful Fallback Visual -->
+              <div class="hidden w-full h-full bg-gradient-to-br from-[#2A1610] via-[#181B20] to-[#D94E28] p-8 flex-col justify-between text-white">
+                <span class="px-3 py-1 rounded-full bg-white/15 text-xs font-bold w-fit">Chef's Signature</span>
+                <div>
+                  <h3 class="text-3xl font-extrabold">Foxtrot Wood-Fired Ribeye</h3>
+                  <p class="text-sm text-stone-200 mt-2">Seared over oak embers with roasted garlic herb butter.</p>
+                </div>
+              </div>
+
+              <!-- Floating Overlay Card -->
+              <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 p-4 sm:p-5 rounded-2xl bg-white/95 dark:bg-[#181B20]/95 backdrop-blur-md border border-stone-200/70 dark:border-gray-800 flex items-center justify-between gap-4 shadow-xl">
+                <div>
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-[#D94E28]">Tonight's Bestseller</span>
+                  <h3 class="font-bold text-sm sm:text-base mt-0.5">Foxtrot Signature Ribeye &amp; Herb Butter</h3>
+                  <p class="text-xs text-stone-500 dark:text-gray-400">Prime cut • Oakwood charcoal • Truffle mash</p>
+                </div>
+                <button
+                  onclick="addToCart('fx-1')"
+                  class="shrink-0 px-4 py-2.5 rounded-xl bg-[#D94E28] hover:bg-[#BE3F1C] text-white text-xs sm:text-sm font-bold transition-colors"
+                >
+                  + ৳1,250
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Menu Section -->
+    <section id="menu-section" class="py-16 bg-white dark:bg-[#14171C] border-y border-stone-200/70 dark:border-gray-800/70">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header + Controls -->
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-[#D94E28]">Curated Kitchen</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold mt-1">Foxtrot Artisanal Menu</h2>
+            <p class="text-sm text-stone-600 dark:text-gray-400 mt-1">
+              Signature steaks, charcoal grills, and fusion mains — customize your preferred spice level.
+            </p>
+          </div>
+
+          <!-- Spice Preference Selector -->
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-gray-400">Spice Level:</span>
+            <div id="spice-selector" class="inline-flex p-1 rounded-xl bg-stone-100 dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800">
+              <button onclick="setSpice('Mild')" data-spice="Mild" class="spice-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all">Mild</button>
+              <button onclick="setSpice('Medium')" data-spice="Medium" class="spice-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-[#D94E28] text-white shadow-xs transition-all">Medium</button>
+              <button onclick="setSpice('Spicy')" data-spice="Spicy" class="spice-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all">Spicy 🔥</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Filter Pills -->
+        <div id="category-pills" class="flex items-center gap-2.5 overflow-x-auto pb-4 mb-8">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- Menu Cards Grid -->
+        <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Promo Banner (FOXTROT20) -->
+    <section id="combos-section" class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="rounded-3xl bg-gradient-to-r from-[#181B20] via-[#261815] to-[#D94E28] p-8 sm:p-12 text-white shadow-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+          <div class="space-y-3 max-w-2xl">
+            <span class="inline-block px-3 py-1 rounded-full bg-white/15 text-xs font-bold uppercase tracking-wider">
+              Exclusive Launch Privilege
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-extrabold leading-tight">
+              Enjoy <span class="text-amber-300">20% Special Off</span> on Your First Online Order!
+            </h2>
+            <p class="text-sm sm:text-base text-stone-200">
+              Use promo code <strong class="text-white">FOXTROT20</strong> at checkout on orders above ৳700. Free delivery across Banani &amp; Gulshan on orders over ৳1,500.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+            <div class="px-5 py-3.5 rounded-2xl bg-black/35 border border-white/20 font-mono text-lg font-extrabold tracking-widest">
+              FOXTROT20
+            </div>
+            <button
+              onclick="copyPromoCode()"
+              class="px-6 py-3.5 rounded-2xl bg-white text-[#141518] hover:bg-stone-100 font-bold text-sm inline-flex items-center gap-2 transition-colors shadow-md"
+            >
+              <i data-lucide="copy" class="w-4 h-4 text-[#D94E28]"></i>
+              <span id="copy-promo-label">Copy Code</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Realistic Dhaka Customer Reviews -->
+    <section id="reviews-section" class="py-16 bg-white dark:bg-[#14171C] border-t border-stone-200/70 dark:border-gray-800/70">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs font-bold uppercase tracking-widest text-[#D94E28]">Guest Impressions</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold mt-1">Loved by Dhaka Food Enthusiasts</h2>
+          <p class="text-sm text-stone-600 dark:text-gray-400 mt-2">
+            Dining stories and reviews from our regular guests across the city
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Review 1 -->
+          <div class="p-7 rounded-3xl bg-[#F7F7F5] dark:bg-[#181B20] border border-stone-200/80 dark:border-gray-800 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 text-amber-500 text-sm mb-4">★★★★★</div>
+              <p class="text-sm sm:text-base text-stone-700 dark:text-gray-300 leading-relaxed">
+                "Foxtrot’s Signature Ribeye and Truffle Risotto are simply phenomenal! Finding such a refined ambiance and a perfectly seared medium-rare steak in Banani is truly rare."
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-stone-200/80 dark:border-gray-800 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-[#D94E28]/15 text-[#D94E28] font-bold flex items-center justify-center text-sm">TH</div>
+              <div>
+                <p class="font-bold text-sm">Tahmid Hasan</p>
+                <p class="text-xs text-stone-500 dark:text-gray-400">Gulshan 2, Dhaka</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="p-7 rounded-3xl bg-[#F7F7F5] dark:bg-[#181B20] border border-stone-200/80 dark:border-gray-800 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 text-amber-500 text-sm mb-4">★★★★★</div>
+              <p class="text-sm sm:text-base text-stone-700 dark:text-gray-300 leading-relaxed">
+                "Ordered the Foxtrot Grand Feast Platter for a family dinner in Dhanmondi. Arrived piping hot in 38 minutes! The Peri-Peri chicken and mint coolers were a huge hit."
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-stone-200/80 dark:border-gray-800 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-[#D94E28]/15 text-[#D94E28] font-bold flex items-center justify-center text-sm">NR</div>
+              <div>
+                <p class="font-bold text-sm">Dr. Nabila Rahman</p>
+                <p class="text-xs text-stone-500 dark:text-gray-400">Dhanmondi, Dhaka</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="p-7 rounded-3xl bg-[#F7F7F5] dark:bg-[#181B20] border border-stone-200/80 dark:border-gray-800 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 text-amber-500 text-sm mb-4">★★★★★</div>
+              <p class="text-sm sm:text-base text-stone-700 dark:text-gray-300 leading-relaxed">
+                "Both the Chargrilled Beef Smash Burger and Salted Caramel Tart are absolute must-tries. Having the custom spice level selector at checkout is a great touch."
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-stone-200/80 dark:border-gray-800 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-[#D94E28]/15 text-[#D94E28] font-bold flex items-center justify-center text-sm">ZC</div>
+              <div>
+                <p class="font-bold text-sm">Zarif Chowdhury</p>
+                <p class="text-xs text-stone-500 dark:text-gray-400">Uttara Sector 7, Dhaka</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <footer id="location-section" class="bg-[#141518] text-stone-300 pt-16 pb-10 mt-auto">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-gray-800">
+          <!-- Brand Info -->
+          <div class="space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-[#D94E28] text-white flex items-center justify-center font-extrabold">F</div>
+              <span class="text-xl font-extrabold text-white">Foxtrot</span>
+            </div>
+            <p class="text-sm text-stone-400 leading-relaxed">
+              Artisanal Bistro, Wood-Fired Grill &amp; Specialty Coffee in the heart of Banani, Dhaka.
+            </p>
+            <p class="text-xs text-stone-500">fb.com/foxtrotdhaka • @foxtrot.bistro</p>
+          </div>
+
+          <!-- Location -->
+          <div class="space-y-3">
+            <h4 class="text-sm font-bold uppercase tracking-wider text-white">Visit Us</h4>
+            <p class="text-sm text-stone-400 flex items-start gap-2.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-[#D94E28] shrink-0 mt-1"></i>
+              <span>House 24, Road 11, Block F, Banani, Dhaka 1213</span>
+            </p>
+            <p class="text-sm text-stone-400 flex items-center gap-2.5">
+              <i data-lucide="phone" class="w-4 h-4 text-[#D94E28] shrink-0"></i>
+              <span>+880 1700-889900</span>
+            </p>
+          </div>
+
+          <!-- Opening Hours -->
+          <div class="space-y-3">
+            <h4 class="text-sm font-bold uppercase tracking-wider text-white">Opening Hours</h4>
+            <p class="text-sm text-stone-400">Sat – Wed: 12:00 PM – 11:30 PM</p>
+            <p class="text-sm text-stone-400">Thu – Fri: 12:00 PM – 12:30 AM</p>
+            <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Open Now for Dine-In &amp; Delivery
+            </span>
+          </div>
+
+          <!-- Quick Portal Links -->
+          <div class="space-y-3">
+            <h4 class="text-sm font-bold uppercase tracking-wider text-white">Management</h4>
+            <p class="text-xs text-stone-400">
+              Restaurant staff &amp; managers can monitor live orders and revenue in the admin panel.
+            </p>
+            <a
+              href="#dashboard.html"
+              onclick="navigateTo('dashboard.html', event)"
+              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#D94E28] hover:bg-[#BE3F1C] text-white text-xs font-bold transition-colors"
+            >
+              <span>Open dashboard.html</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
+          <p>© 2026 Foxtrot Bistro &amp; Grill Dhaka. All rights reserved.</p>
+          <p>Files: <code class="text-stone-300">index.html</code> &amp; <code class="text-stone-300">dashboard.html</code></p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+
+  <!-- =====================================================================
+       SLIDE-OVER CART & CHECKOUT DRAWER (FOR INDEX.HTML)
+       ===================================================================== -->
+  <div id="cart-drawer-backdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs hidden transition-opacity"></div>
+  <aside
+    id="cart-drawer"
+    class="fixed top-0 right-0 z-50 h-full w-full max-w-md bg-white dark:bg-[#181B20] border-l border-stone-200 dark:border-gray-800 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col"
+  >
+    <!-- Drawer Header -->
+    <div class="px-6 py-5 border-b border-stone-200 dark:border-gray-800 flex items-center justify-between">
+      <div>
+        <h3 class="text-lg font-extrabold">Your Foxtrot Order</h3>
+        <p class="text-xs text-stone-500 dark:text-gray-400">Selected Spice: <span id="cart-spice-label" class="font-bold text-[#D94E28]">Medium</span></p>
+      </div>
+      <button onclick="toggleCartDrawer(false)" class="p-2 rounded-xl hover:bg-stone-100 dark:hover:bg-gray-800">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Drawer Scrollable Body -->
+    <div class="flex-1 overflow-y-auto p-6 space-y-6">
+      <!-- Cart Items List -->
+      <div id="cart-items-container" class="space-y-3">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Promo Code Input -->
+      <div class="p-4 rounded-2xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200/80 dark:border-gray-800 space-y-2.5">
+        <label class="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-gray-400 block">Promo Code</label>
+        <div class="flex gap-2">
+          <input
+            id="promo-input"
+            type="text"
+            placeholder="Try FOXTROT20"
+            class="flex-1 px-3.5 py-2 rounded-xl bg-white dark:bg-[#181B20] border border-stone-200 dark:border-gray-700 text-sm font-semibold uppercase focus:outline-none focus:border-[#D94E28]"
+          />
+          <button
+            onclick="applyPromoCode()"
+            class="px-4 py-2 rounded-xl bg-[#141518] dark:bg-white text-white dark:text-[#141518] text-xs font-bold hover:bg-[#D94E28] dark:hover:bg-[#D94E28] dark:hover:text-white transition-colors"
+          >
+            Apply
+          </button>
+        </div>
+        <p id="promo-status-msg" class="text-xs font-medium hidden"></p>
+      </div>
+
+      <!-- Customer Delivery Form -->
+      <form id="checkout-form" onsubmit="handleCheckout(event)" class="space-y-4">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-gray-400">Delivery Details (Dhaka)</h4>
+        <div>
+          <label class="block text-xs font-semibold mb-1">Full Name *</label>
+          <input
+            id="cust-name"
+            type="text"
+            required
+            placeholder="e.g., Farhan Sadik"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800 text-sm focus:outline-none focus:border-[#D94E28]"
+          />
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold mb-1">Phone Number *</label>
+            <input
+              id="cust-phone"
+              type="tel"
+              required
+              placeholder="017XX-XXXXXX"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800 text-sm focus:outline-none focus:border-[#D94E28]"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold mb-1">Delivery Area</label>
+            <select
+              id="cust-area"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800 text-sm focus:outline-none focus:border-[#D94E28]"
+            >
+              <option value="Banani">Banani (৳60)</option>
+              <option value="Gulshan">Gulshan (৳60)</option>
+              <option value="Dhanmondi">Dhanmondi (৳60)</option>
+              <option value="Uttara">Uttara (৳60)</option>
+              <option value="Mirpur">Mirpur (৳60)</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Drawer Footer Summary -->
+    <div class="p-6 border-t border-stone-200 dark:border-gray-800 bg-[#F7F7F5] dark:bg-[#0F1115] space-y-3">
+      <div class="space-y-1.5 text-sm">
+        <div class="flex justify-between text-stone-600 dark:text-gray-400">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">৳0</span>
+        </div>
+        <div id="cart-discount-row" class="hidden flex justify-between text-emerald-600 dark:text-emerald-400 font-semibold">
+          <span>Promo Discount (20%)</span>
+          <span id="cart-discount">-৳0</span>
+        </div>
+        <div class="flex justify-between text-stone-600 dark:text-gray-400">
+          <span>Delivery Charge</span>
+          <span id="cart-delivery">৳60</span>
+        </div>
+        <div class="flex justify-between text-base font-extrabold pt-2 border-t border-stone-200 dark:border-gray-800">
+          <span>Total Payable</span>
+          <span id="cart-total" class="text-[#D94E28]">৳0</span>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        form="checkout-form"
+        class="w-full py-3.5 rounded-2xl bg-[#D94E28] hover:bg-[#BE3F1C] text-white font-bold text-sm shadow-lg shadow-[#D94E28]/25 transition-all"
+      >
+        Place Order • Cash on Delivery
+      </button>
+    </div>
+  </aside>
+
+  <!-- Order Success Receipt Modal -->
+  <div id="receipt-modal" class="fixed inset-0 z-[60] bg-black/60 backdrop-blur-xs hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-[#181B20] border border-stone-200 dark:border-gray-800 rounded-3xl max-w-md w-full p-7 shadow-2xl text-center space-y-5">
+      <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
+        <i data-lucide="check-circle-2" class="w-8 h-8"></i>
+      </div>
+      <div>
+        <span id="receipt-order-id" class="px-3 py-1 rounded-full bg-[#D94E28]/10 text-[#D94E28] text-xs font-extrabold">#FX-5108</span>
+        <h3 class="text-2xl font-extrabold mt-2">Order Confirmed!</h3>
+        <p class="text-sm text-stone-600 dark:text-gray-400 mt-1">
+          Your order has been received by our Banani kitchen. Estimated delivery is within 35–40 minutes.
+        </p>
+      </div>
+      <div id="receipt-summary" class="p-4 rounded-2xl bg-[#F7F7F5] dark:bg-[#0F1115] text-left text-xs space-y-1.5 border border-stone-200/70 dark:border-gray-800">
+        <!-- Populated dynamically -->
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 pt-1">
+        <a
+          href="#dashboard.html"
+          onclick="closeReceiptAndGoAdmin(event)"
+          class="flex-1 py-3 px-4 rounded-xl bg-[#D94E28] hover:bg-[#BE3F1C] text-white text-xs font-bold transition-colors"
+        >
+          View in dashboard.html ↗
+        </a>
+        <button
+          onclick="closeReceiptModal()"
+          class="flex-1 py-3 px-4 rounded-xl bg-stone-100 dark:bg-gray-800 text-xs font-bold hover:bg-stone-200 dark:hover:bg-gray-700 transition-colors"
+        >
+          Continue Browsing
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =====================================================================
+       ADMIN LOGIN GATE (#page-admin-login)
+       ===================================================================== -->
+  <div id="page-admin-login" class="hidden min-h-screen flex flex-col justify-between bg-[#F7F7F5] dark:bg-[#0F1115] px-4 py-6 sm:px-6">
+    <!-- Top Utility Bar -->
+    <div class="max-w-5xl w-full mx-auto flex items-center justify-between">
+      <a
+        href="#index.html"
+        onclick="navigateTo('index.html', event)"
+        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-[#181B20] border border-stone-200 dark:border-gray-800 text-xs sm:text-sm font-bold hover:border-[#D94E28] transition-colors shadow-xs"
+      >
+        <span>← Back to index.html</span>
+      </a>
+
+      <button
+        onclick="toggleTheme()"
+        aria-label="Toggle Dark Mode"
+        class="p-2.5 rounded-xl bg-white dark:bg-[#181B20] text-stone-700 dark:text-gray-200 hover:bg-stone-100 dark:hover:bg-gray-800 border border-stone-200 dark:border-gray-800 transition-colors shadow-xs"
+      >
+        <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+        <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-400"></i>
+      </button>
+    </div>
+
+    <!-- Centered Login Card -->
+    <div class="my-auto py-8 flex items-center justify-center">
+      <div id="admin-login-card" class="w-full max-w-md rounded-3xl bg-white dark:bg-[#181B20] border border-stone-200/90 dark:border-gray-800 p-7 sm:p-9 shadow-2xl space-y-6">
+        <!-- Brand Header -->
+        <div class="text-center space-y-2.5">
+          <div class="w-14 h-14 rounded-2xl bg-[#D94E28] text-white flex items-center justify-center mx-auto shadow-lg shadow-[#D94E28]/25">
+            <i data-lucide="shield-check" class="w-7 h-7"></i>
+          </div>
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-widest text-[#D94E28]">Foxtrot Banani Flagship</span>
+            <h1 class="text-2xl sm:text-3xl font-extrabold mt-0.5">Admin Console Login</h1>
+            <p class="text-xs sm:text-sm text-stone-500 dark:text-gray-400 mt-1">
+              Sign in to manage live kitchen orders, revenue &amp; menu items.
+            </p>
+          </div>
+        </div>
+
+        <!-- Error Message Alert -->
+        <div id="admin-login-error" class="hidden p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs font-bold flex items-center gap-2.5">
+          <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <span>Invalid Login ID or Password. Please verify your credentials and try again.</span>
+        </div>
+
+        <!-- Login Form -->
+        <form id="admin-login-form" onsubmit="handleAdminLogin(event)" class="space-y-4">
+          <div>
+            <label for="admin-login-id" class="block text-xs font-bold uppercase tracking-wider text-stone-600 dark:text-gray-300 mb-1.5">
+              Login ID
+            </label>
+            <div class="relative">
+              <svg class="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              </svg>
+              <input
+                id="admin-login-id"
+                type="text"
+                required
+                autocomplete="username"
+                placeholder="Enter User ID"
+                class="w-full pl-10 pr-4 py-3 rounded-xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800 text-sm font-semibold focus:outline-none focus:border-[#D94E28] transition-colors"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="admin-login-pass" class="block text-xs font-bold uppercase tracking-wider text-stone-600 dark:text-gray-300 mb-1.5">
+              Password
+            </label>
+            <div class="relative">
+              <svg class="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              <input
+                id="admin-login-pass"
+                type="password"
+                required
+                autocomplete="current-password"
+                placeholder="Enter password"
+                class="w-full pl-10 pr-11 py-3 rounded-xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800 text-sm font-semibold focus:outline-none focus:border-[#D94E28] transition-colors"
+              />
+              <button
+                type="button"
+                onclick="togglePasswordVisibility()"
+                aria-label="Show or hide password"
+                class="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-lg text-stone-400 hover:text-stone-700 dark:hover:text-gray-200 transition-colors"
+              >
+                <svg id="eye-show" class="w-4 h-4 block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+                <svg id="eye-hide" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" y1="2" x2="22" y2="22"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full py-3.5 rounded-2xl bg-[#D94E28] hover:bg-[#BE3F1C] text-white font-bold text-sm shadow-lg shadow-[#D94E28]/25 transition-all flex items-center justify-center gap-2"
+          >
+            <span>Sign In to Dashboard</span>
+            <span>→</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bottom Caption -->
+    <p class="text-center text-xs text-stone-400">
+      Foxtrot Bistro &amp; Grill • Authorized Staff Portal
+    </p>
+  </div>
+
+
+  <!-- =====================================================================
+       PAGE 2: DASHBOARD.HTML (FOXTROT ADMIN DASHBOARD)
+       ===================================================================== -->
+  <div id="page-dashboard" class="hidden min-h-screen flex bg-[#F7F7F5] dark:bg-[#0F1115]">
+
+    <!-- Mobile Sidebar Backdrop -->
+    <div id="sidebar-backdrop" onclick="toggleAdminSidebar(false)" class="fixed inset-0 z-40 bg-black/55 backdrop-blur-xs lg:hidden hidden transition-opacity"></div>
+
+    <!-- Responsive Left Sidebar -->
+    <aside
+      id="admin-sidebar"
+      class="fixed lg:sticky top-0 left-0 z-50 h-screen w-64 bg-white dark:bg-[#181B20] border-r border-stone-200 dark:border-gray-800 flex flex-col justify-between transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out shrink-0"
+    >
+      <div>
+        <!-- Brand Header -->
+        <div class="h-20 px-6 flex items-center justify-between border-b border-stone-200/80 dark:border-gray-800">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-[#D94E28] text-white flex items-center justify-center font-extrabold shadow">F</div>
+            <div>
+              <span class="font-extrabold text-base block leading-none">Foxtrot</span>
+              <span class="text-[11px] font-semibold text-stone-500 dark:text-gray-400">Admin Console</span>
+            </div>
+          </div>
+          <button type="button" onclick="toggleAdminSidebar(false)" aria-label="Close Sidebar" class="lg:hidden p-2 rounded-xl hover:bg-stone-100 dark:hover:bg-gray-800 text-stone-600 dark:text-gray-300">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Sidebar Navigation -->
+        <nav class="p-4 space-y-1.5">
+          <button onclick="switchAdminTab('Dashboard')" data-tab="Dashboard" class="admin-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold bg-[#D94E28] text-white shadow-sm">
+            <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+            <span>Dashboard</span>
+          </button>
+          <button onclick="switchAdminTab('Orders')" data-tab="Orders" class="admin-nav-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold text-stone-600 dark:text-gray-300 hover:bg-stone-100 dark:hover:bg-gray-800">
+            <span class="flex items-center gap-3">
+              <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+              <span>Orders</span>
+            </span>
+            <span id="sidebar-pending-badge" class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400">2</span>
+          </button>
+          <button onclick="switchAdminTab('Products')" data-tab="Products" class="admin-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-stone-600 dark:text-gray-300 hover:bg-stone-100 dark:hover:bg-gray-800">
+            <i data-lucide="utensils" class="w-4 h-4"></i>
+            <span>Products</span>
+          </button>
+          <button onclick="switchAdminTab('Customers')" data-tab="Customers" class="admin-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-stone-600 dark:text-gray-300 hover:bg-stone-100 dark:hover:bg-gray-800">
+            <i data-lucide="users" class="w-4 h-4"></i>
+            <span>Customers</span>
+          </button>
+          <button onclick="switchAdminTab('Settings')" data-tab="Settings" class="admin-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-stone-600 dark:text-gray-300 hover:bg-stone-100 dark:hover:bg-gray-800">
+            <i data-lucide="settings" class="w-4 h-4"></i>
+            <span>Settings</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Sidebar Footer Actions: Logout & Back to index.html -->
+      <div class="p-4 border-t border-stone-200/80 dark:border-gray-800 space-y-2.5">
+        <button
+          type="button"
+          onclick="logoutAdmin()"
+          class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500 text-rose-600 dark:text-rose-400 hover:text-white text-xs font-bold border border-rose-500/20 transition-all"
+        >
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+          <span>Logout</span>
+        </button>
+
+        <a
+          href="#index.html"
+          onclick="navigateTo('index.html', event)"
+          class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-stone-100 dark:bg-[#0F1115] hover:bg-[#D94E28] hover:text-white text-xs font-bold border border-stone-200 dark:border-gray-800 transition-all"
+        >
+          <span>← Back to index.html</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Dashboard Content Wrapper -->
+    <div class="flex-1 flex flex-col min-w-0">
+
+      <!-- Admin Top Bar -->
+      <header class="sticky top-0 z-30 h-20 px-4 sm:px-8 bg-white/90 dark:bg-[#181B20]/90 glass-nav border-b border-stone-200/80 dark:border-gray-800 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3 flex-1 max-w-md">
+          <!-- Mobile Hamburger Button -->
+          <button
+            type="button"
+            onclick="toggleAdminSidebar(true)"
+            aria-label="Open Admin Menu"
+            class="lg:hidden p-2.5 rounded-xl bg-stone-100 dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800 text-stone-800 dark:text-gray-100 hover:bg-stone-200 dark:hover:bg-gray-800 transition-colors shrink-0"
+          >
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+
+          <!-- Global Search Box -->
+          <div class="relative flex-1">
+            <i data-lucide="search" class="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+            <input
+              id="admin-search-input"
+              type="text"
+              oninput="handleAdminSearch(this.value)"
+              placeholder="Search order ID, customer, dish..."
+              class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800 text-sm focus:outline-none focus:border-[#D94E28]"
+            />
+          </div>
+        </div>
+
+        <!-- Right Bar Items -->
+        <div class="flex items-center gap-3">
+          <!-- Dark Mode Toggle -->
+          <button
+            onclick="toggleTheme()"
+            aria-label="Toggle Dark Mode"
+            class="p-2.5 rounded-xl bg-stone-100 dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800 hover:bg-stone-200 dark:hover:bg-gray-800 transition-colors"
+          >
+            <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+            <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-400"></i>
+          </button>
+
+          <!-- Notification Bell with Dropdown -->
+          <div class="relative">
+            <button
+              onclick="toggleNotifDropdown()"
+              class="relative p-2.5 rounded-xl bg-stone-100 dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800 hover:bg-stone-200 dark:hover:bg-gray-800 transition-colors"
+            >
+              <i data-lucide="bell" class="w-4 h-4"></i>
+              <span id="notif-dot" class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#D94E28]"></span>
+            </button>
+
+            <div
+              id="notif-dropdown"
+              class="hidden absolute right-0 mt-2 w-80 rounded-2xl bg-white dark:bg-[#181B20] border border-stone-200 dark:border-gray-800 shadow-xl p-4 z-50 space-y-3"
+            >
+              <div class="flex items-center justify-between border-b border-stone-200 dark:border-gray-800 pb-2">
+                <span class="text-xs font-extrabold uppercase tracking-wider">Kitchen Alerts</span>
+                <span class="text-[11px] text-[#D94E28] font-bold">Live</span>
+              </div>
+              <div id="notif-list" class="space-y-2 text-xs">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Admin Profile & Quick Logout -->
+          <div class="flex items-center gap-3 pl-2 border-l border-stone-200 dark:border-gray-800">
+            <div class="w-9 h-9 rounded-xl bg-[#D94E28] text-white font-extrabold text-xs flex items-center justify-center">
+              AM
+            </div>
+            <div class="hidden sm:block">
+              <p class="text-sm font-bold leading-none">Arif Mahmud</p>
+              <p class="text-[11px] text-stone-500 dark:text-gray-400 mt-0.5">General Manager</p>
+            </div>
+            <button
+              type="button"
+              onclick="logoutAdmin()"
+              title="Logout of Admin Console"
+              class="p-2 rounded-xl bg-stone-100 dark:bg-[#0F1115] hover:bg-rose-500 hover:text-white text-stone-600 dark:text-gray-300 border border-stone-200 dark:border-gray-800 transition-colors"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Admin Workspace -->
+      <main class="flex-1 p-4 sm:p-8 max-w-7xl w-full mx-auto space-y-8">
+
+        <!-- TAB 1: DASHBOARD OVERVIEW -->
+        <section id="admin-tab-Dashboard" class="admin-tab-panel space-y-8">
+          <!-- Page Heading -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h1 class="text-2xl sm:text-3xl font-extrabold">Foxtrot Dashboard</h1>
+              <p class="text-sm text-stone-500 dark:text-gray-400 mt-0.5">
+                Banani Flagship • Live Revenue &amp; Kitchen Operations (26 Nov 2026)
+              </p>
+            </div>
+            <a
+              href="#index.html"
+              onclick="navigateTo('index.html', event)"
+              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-[#181B20] border border-stone-200 dark:border-gray-800 text-xs font-bold hover:border-[#D94E28] transition-colors w-fit"
+            >
+              <span>Preview Customer Landing Page</span>
+              <span>↗</span>
+            </a>
+          </div>
+
+          <!-- 4 KPI Stats Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+            <!-- Card 1: Today's Sales -->
+            <div class="p-6 rounded-3xl bg-white dark:bg-[#181B20] border border-stone-200/80 dark:border-gray-800 shadow-xs space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-gray-400">Today's Sales</span>
+                <span class="p-2 rounded-xl bg-[#D94E28]/10 text-[#D94E28]">
+                  <i data-lucide="banknote" class="w-4 h-4"></i>
+                </span>
+              </div>
+              <div class="flex items-baseline justify-between">
+                <h3 id="kpi-sales" class="text-2xl sm:text-3xl font-extrabold">৳74,250</h3>
+                <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">+16.4%</span>
+              </div>
+              <p class="text-xs text-stone-500 dark:text-gray-400">Today's net bistro &amp; delivery sales</p>
+            </div>
+
+            <!-- Card 2: Total Orders -->
+            <div class="p-6 rounded-3xl bg-white dark:bg-[#181B20] border border-stone-200/80 dark:border-gray-800 shadow-xs space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-gray-400">Total Orders</span>
+                <span class="p-2 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                  <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                </span>
+              </div>
+              <div class="flex items-baseline justify-between">
+                <h3 id="kpi-orders" class="text-2xl sm:text-3xl font-extrabold">132</h3>
+                <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">+9.8%</span>
+              </div>
+              <p class="text-xs text-stone-500 dark:text-gray-400">Completed &amp; active orders today</p>
+            </div>
+
+            <!-- Card 3: New Customers -->
+            <div class="p-6 rounded-3xl bg-white dark:bg-[#181B20] border border-stone-200/80 dark:border-gray-800 shadow-xs space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-gray-400">New Customers</span>
+                <span class="p-2 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                  <i data-lucide="user-plus" class="w-4 h-4"></i>
+                </span>
+              </div>
+              <div class="flex items-baseline justify-between">
+                <h3 id="kpi-customers" class="text-2xl sm:text-3xl font-extrabold">38</h3>
+                <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">+12%</span>
+              </div>
+              <p class="text-xs text-stone-500 dark:text-gray-400">First-time diners &amp; online guests</p>
+            </div>
+
+            <!-- Card 4: Pending Orders -->
+            <div class="p-6 rounded-3xl bg-white dark:bg-[#181B20] border border-stone-200/80 dark:border-gray-800 shadow-xs space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-gray-400">Pending Orders</span>
+                <span class="p-2 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
+                  <i data-lucide="clock" class="w-4 h-4"></i>
+                </span>
+              </div>
+              <div class="flex items-baseline justify-between">
+                <h3 id="kpi-pending" class="text-2xl sm:text-3xl font-extrabold text-amber-600 dark:text-amber-400">2</h3>
+                <span class="text-xs font-semibold text-stone-500 dark:text-gray-400">In Kitchen</span>
+              </div>
+              <p class="text-xs text-stone-500 dark:text-gray-400">Awaiting preparation or rider dispatch</p>
+            </div>
+          </div>
+
+          <!-- Weekly Sales Chart -->
+          <div class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#181B20] border border-stone-200/80 dark:border-gray-800 shadow-xs">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
+              <div>
+                <h2 class="text-lg font-extrabold">Weekly Revenue Overview</h2>
+                <p class="text-xs text-stone-500 dark:text-gray-400">Saturday – Friday performance in BDT (৳)</p>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-[#D94E28]/10 text-[#D94E28] text-xs font-bold w-fit">
+                Peak Day: Thursday (৳92,400)
+              </span>
+            </div>
+
+            <!-- Interactive Bar Chart -->
+            <div id="weekly-chart" class="grid grid-cols-7 gap-3 sm:gap-6 items-end h-56 pt-8 px-2">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- Recent Orders Table -->
+          <div class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#181B20] border border-stone-200/80 dark:border-gray-800 shadow-xs space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 class="text-lg font-extrabold">Recent Orders</h2>
+                <p class="text-xs text-stone-500 dark:text-gray-400">Click any status badge to cycle order progress live</p>
+              </div>
+
+              <!-- Status Filter Tabs -->
+              <div id="order-filter-tabs" class="inline-flex flex-wrap gap-1.5 p-1 rounded-xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800">
+                <button onclick="setOrderFilter('All')" data-filter="All" class="order-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-[#D94E28] text-white">All</button>
+                <button onclick="setOrderFilter('Pending')" data-filter="Pending" class="order-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold text-stone-600 dark:text-gray-300">Pending</button>
+                <button onclick="setOrderFilter('Delivered')" data-filter="Delivered" class="order-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold text-stone-600 dark:text-gray-300">Delivered</button>
+                <button onclick="setOrderFilter('Cancelled')" data-filter="Cancelled" class="order-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold text-stone-600 dark:text-gray-300">Cancelled</button>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="border-b border-stone-200 dark:border-gray-800 text-[11px] font-bold uppercase tracking-wider text-stone-500 dark:text-gray-400">
+                    <th class="py-3.5 px-4">Order ID</th>
+                    <th class="py-3.5 px-4">Customer</th>
+                    <th class="py-3.5 px-4">Ordered Items</th>
+                    <th class="py-3.5 px-4">Amount</th>
+                    <th class="py-3.5 px-4">Date &amp; Time</th>
+                    <th class="py-3.5 px-4">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-orders-tbody" class="divide-y divide-stone-100 dark:divide-gray-800/80 text-sm">
+                  <!-- Rendered by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Bottom 2-Column Grid: Top Products & Low Stock Alerts -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Top Products -->
+            <div class="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#181B20] border border-stone-200/80 dark:border-gray-800 shadow-xs space-y-5">
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg font-extrabold">Top Selling Products</h3>
+                <span class="text-xs font-semibold text-stone-500 dark:text-gray-400">Today</span>
+              </div>
+              <div id="top-products-list" class="space-y-4">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+
+            <!-- Low Stock Alerts -->
+            <div class="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#181B20] border border-stone-200/80 dark:border-gray-800 shadow-xs space-y-5">
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg font-extrabold">Low Stock Kitchen Alerts</h3>
+                <span class="px-2.5 py-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 text-xs font-bold">3 Alerts</span>
+              </div>
+              <div class="space-y-3.5">
+                <div class="p-4 rounded-2xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200/70 dark:border-gray-800 flex items-center justify-between">
+                  <div>
+                    <p class="font-bold text-sm">Prime Ribeye Cuts (280g)</p>
+                    <p class="text-xs text-stone-500 dark:text-gray-400">Cold Storage • Butcher Prep</p>
+                  </div>
+                  <span class="px-3 py-1 rounded-full bg-rose-500/15 text-rose-600 dark:text-rose-400 text-xs font-extrabold">4 left</span>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200/70 dark:border-gray-800 flex items-center justify-between">
+                  <div>
+                    <p class="font-bold text-sm">Saffron &amp; White Truffle Oil</p>
+                    <p class="text-xs text-stone-500 dark:text-gray-400">Pantry • Risotto Station</p>
+                  </div>
+                  <span class="px-3 py-1 rounded-full bg-rose-500/15 text-rose-600 dark:text-rose-400 text-xs font-extrabold">2 bottles left</span>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200/70 dark:border-gray-800 flex items-center justify-between">
+                  <div>
+                    <p class="font-bold text-sm">Artisanal Brioche Burger Buns</p>
+                    <p class="text-xs text-stone-500 dark:text-gray-400">In-House Bakery</p>
+                  </div>
+                  <span class="px-3 py-1 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 text-xs font-extrabold">9 pcs left</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 2: ALL ORDERS VIEW -->
+        <section id="admin-tab-Orders" class="admin-tab-panel hidden space-y-6">
+          <div>
+            <h1 class="text-2xl font-extrabold">All Orders Management</h1>
+            <p class="text-sm text-stone-500 dark:text-gray-400">Manage live incoming orders from index.html and update delivery status.</p>
+          </div>
+          <div class="p-6 rounded-3xl bg-white dark:bg-[#181B20] border border-stone-200 dark:border-gray-800 overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-stone-200 dark:border-gray-800 text-[11px] font-bold uppercase tracking-wider text-stone-500">
+                  <th class="py-3.5 px-4">Order ID</th>
+                  <th class="py-3.5 px-4">Customer &amp; Area</th>
+                  <th class="py-3.5 px-4">Items</th>
+                  <th class="py-3.5 px-4">Total</th>
+                  <th class="py-3.5 px-4">Time</th>
+                  <th class="py-3.5 px-4">Status (Click to Change)</th>
+                </tr>
+              </thead>
+              <tbody id="full-orders-tbody" class="divide-y divide-stone-100 dark:divide-gray-800 text-sm">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- TAB 3: PRODUCTS & MENU MANAGEMENT -->
+        <section id="admin-tab-Products" class="admin-tab-panel hidden space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h1 class="text-2xl font-extrabold">Menu &amp; Products</h1>
+              <p class="text-sm text-stone-500 dark:text-gray-400">Add new dishes directly to the Foxtrot landing page menu.</p>
+            </div>
+          </div>
+
+          <!-- Add New Product Form -->
+          <form onsubmit="handleAddProduct(event)" class="p-6 rounded-3xl bg-white dark:bg-[#181B20] border border-stone-200 dark:border-gray-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+            <div>
+              <label class="block text-xs font-bold mb-1">Dish Name</label>
+              <input id="new-dish-name" type="text" required placeholder="e.g., Smoked Duck Breast" class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold mb-1">Culinary Tagline</label>
+              <input id="new-dish-tagline" type="text" required placeholder="e.g., Oak-smoked with citrus glaze" class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold mb-1">Category</label>
+              <select id="new-dish-cat" class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800 text-sm">
+                <option value="Wood-Fired Grills">Wood-Fired Grills</option>
+                <option value="Artisan Mains">Artisan Mains</option>
+                <option value="Platters">Platters</option>
+                <option value="Craft Drinks & Desserts">Craft Drinks &amp; Desserts</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold mb-1">Price (৳)</label>
+              <input id="new-dish-price" type="number" min="50" required placeholder="850" class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800 text-sm" />
+            </div>
+            <button type="submit" class="py-2.5 px-5 rounded-xl bg-[#D94E28] hover:bg-[#BE3F1C] text-white font-bold text-sm transition-colors">
+              + Add Dish
+            </button>
+          </form>
+
+          <!-- Product List Grid -->
+          <div id="admin-products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Rendered by JS -->
+          </div>
+        </section>
+
+        <!-- TAB 4: CUSTOMERS DIRECTORY -->
+        <section id="admin-tab-Customers" class="admin-tab-panel hidden space-y-6">
+          <div>
+            <h1 class="text-2xl font-extrabold">Dhaka Diners &amp; Customers</h1>
+            <p class="text-sm text-stone-500 dark:text-gray-400">Regular guests and delivery order history.</p>
+          </div>
+          <div id="admin-customers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Rendered by JS -->
+          </div>
+        </section>
+
+        <!-- TAB 5: SETTINGS -->
+        <section id="admin-tab-Settings" class="admin-tab-panel hidden space-y-6">
+          <div>
+            <h1 class="text-2xl font-extrabold">Restaurant Settings</h1>
+            <p class="text-sm text-stone-500 dark:text-gray-400">Configure Foxtrot Banani branch details and promotional rules.</p>
+          </div>
+          <div class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#181B20] border border-stone-200 dark:border-gray-800 max-w-2xl space-y-5">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Restaurant Name</label>
+              <input type="text" value="Foxtrot — Artisanal Bistro, Grill & Cafe" readonly class="w-full px-4 py-2.5 rounded-xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800 text-sm font-semibold" />
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Active Promo Code</label>
+                <input type="text" value="FOXTROT20 (20% Off)" readonly class="w-full px-4 py-2.5 rounded-xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800 text-sm font-semibold text-[#D94E28]" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Standard Delivery Fee</label>
+                <input type="text" value="৳60 (Free over ৳1,500)" readonly class="w-full px-4 py-2.5 rounded-xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200 dark:border-gray-800 text-sm font-semibold" />
+              </div>
+            </div>
+            <div class="pt-2">
+              <button onclick="resetDemoData()" class="px-5 py-2.5 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500/20 text-xs font-bold transition-colors">
+                Reset Demo Data to Default
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+
+  <!-- =====================================================================
+       APPLICATION STATE, ROUTING & REAL-TIME SYNC ENGINE
+       ===================================================================== -->
+  <script>
+    // 1. Default Foxtrot Menu Items
+    const DEFAULT_MENU = [
+      {
+        id: 'fx-1',
+        name: 'Foxtrot Signature Ribeye & Herb Butter',
+        tagline: 'Oakwood-seared prime cut with roasted garlic herb butter',
+        category: 'Wood-Fired Grills',
+        price: 1250,
+        desc: '280g prime ribeye seared over oakwood charcoal, finished with roasted garlic herb butter & truffle mash.',
+        badge: 'Chef Signature',
+        image: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=800&q=80',
+        soldToday: 34
+      },
+      {
+        id: 'fx-2',
+        name: 'Smoky Peri-Peri Half Chicken',
+        tagline: 'Flame-grilled spring chicken with charred corn & garlic dip',
+        category: 'Wood-Fired Grills',
+        price: 540,
+        desc: '24-hour bird’s eye chili & citrus marinated spring chicken flame-grilled with charred corn & garlic dip.',
+        badge: 'Bestseller',
+        image: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=800&q=80',
+        soldToday: 52
+      },
+      {
+        id: 'fx-3',
+        name: 'Truffle Mushroom & Chicken Risotto',
+        tagline: 'Creamy Arborio rice with wild porcini & aged parmesan',
+        category: 'Artisan Mains',
+        price: 620,
+        desc: 'Creamy Arborio rice slow-cooked with wild porcini mushrooms, grilled chicken breast, aged parmesan & truffle oil.',
+        badge: 'Must Try',
+        image: 'https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&fit=crop&w=800&q=80',
+        soldToday: 29
+      },
+      {
+        id: 'fx-4',
+        name: 'Foxtrot Grand Feast Platter (Serves 4)',
+        tagline: 'Complete family sharing feast with grills, rice & coolers',
+        category: 'Platters',
+        price: 2490,
+        desc: '4 Wood-Fired Grilled Mains, Crispy Garlic Fries, Saffron Herb Rice, Sautéed Veggies & 4 Fresh Mint Coolers.',
+        badge: 'Group Value',
+        image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80',
+        soldToday: 19
+      },
+      {
+        id: 'fx-5',
+        name: 'Chargrilled Beef Smash Burger',
+        tagline: 'Double prime beef patties with aged cheddar & smoky sauce',
+        category: 'Artisan Mains',
+        price: 450,
+        desc: 'Double smashed prime beef patties, aged cheddar, caramelized shallots & smoky Foxtrot house sauce on brioche.',
+        badge: 'Popular',
+        image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80',
+        soldToday: 46
+      },
+      {
+        id: 'fx-6',
+        name: 'Salted Caramel & Hazelnut Tart',
+        tagline: 'Dark cocoa pastry with sea-salt caramel ganache',
+        category: 'Craft Drinks & Desserts',
+        price: 260,
+        desc: 'Crisp dark cocoa pastry shell filled with silky sea-salt caramel ganache and roasted Piedmont hazelnuts.',
+        badge: 'Sweet Finish',
+        image: 'https://images.unsplash.com/photo-1519915028121-7d3463d20b13?auto=format&fit=crop&w=800&q=80',
+        soldToday: 31
+      },
+      {
+        id: 'fx-7',
+        name: 'Roasted Peach & Basil Iced Tea',
+        tagline: 'Cold-brewed Assam tea infused with caramelized peach',
+        category: 'Craft Drinks & Desserts',
+        price: 190,
+        desc: 'Cold-brewed Assam black tea infused with caramelized peach puree, garden sweet basil & crushed ice.',
+        badge: 'Refreshing',
+        image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=800&q=80',
+        soldToday: 41
+      }
+    ];
+
+    // 2. Default Realistic Orders (26 Nov 2026)
+    const DEFAULT_ORDERS = [
+      {
+        id: '#FX-5107',
+        customer: 'Tahmid Hasan',
+        phone: '01711-234567',
+        area: 'Gulshan',
+        items: 'Foxtrot Signature Ribeye (1x), Roasted Peach Iced Tea (1x) [Medium]',
+        total: 1500,
+        dateTime: '26 Nov 2026, 05:10 PM',
+        status: 'Pending'
+      },
+      {
+        id: '#FX-5106',
+        customer: 'Dr. Nabila Rahman',
+        phone: '01819-876543',
+        area: 'Dhanmondi',
+        items: 'Foxtrot Grand Feast Platter (1x) [Mild]',
+        total: 2490,
+        dateTime: '26 Nov 2026, 04:45 PM',
+        status: 'Pending'
+      },
+      {
+        id: '#FX-5105',
+        customer: 'Zarif Chowdhury',
+        phone: '01675-112233',
+        area: 'Uttara',
+        items: 'Chargrilled Beef Smash Burger (2x), Salted Caramel Tart (1x) [Spicy]',
+        total: 1220,
+        dateTime: '26 Nov 2026, 03:50 PM',
+        status: 'Delivered'
+      },
+      {
+        id: '#FX-5104',
+        customer: 'Sadia Afrin',
+        phone: '01912-445566',
+        area: 'Banani',
+        items: 'Truffle Mushroom & Chicken Risotto (2x) [Medium]',
+        total: 1300,
+        dateTime: '26 Nov 2026, 02:30 PM',
+        status: 'Delivered'
+      },
+      {
+        id: '#FX-5103',
+        customer: 'Rafiqul Islam',
+        phone: '01521-998877',
+        area: 'Mirpur',
+        items: 'Smoky Peri-Peri Half Chicken (1x) [Spicy]',
+        total: 600,
+        dateTime: '26 Nov 2026, 01:40 PM',
+        status: 'Cancelled'
+      },
+      {
+        id: '#FX-5102',
+        customer: 'Mehnaz Karim',
+        phone: '01730-665544',
+        area: 'Banani',
+        items: 'Foxtrot Signature Ribeye (1x), Salted Caramel Tart (2x) [Medium]',
+        total: 1770,
+        dateTime: '26 Nov 2026, 01:05 PM',
+        status: 'Delivered'
+      }
+    ];
+
+    const WEEKLY_REVENUE = [
+      { day: 'Sat', amount: 68500 },
+      { day: 'Sun', amount: 61200 },
+      { day: 'Mon', amount: 65800 },
+      { day: 'Tue', amount: 71400 },
+      { day: 'Wed', amount: 76900 },
+      { day: 'Thu', amount: 92400 },
+      { day: 'Fri', amount: 88600 }
+    ];
+
+    // App State
+    let menuItems = JSON.parse(localStorage.getItem('foxtrot_menu')) || DEFAULT_MENU;
+    let orders = JSON.parse(localStorage.getItem('foxtrot_orders')) || DEFAULT_ORDERS;
+    let cart = JSON.parse(localStorage.getItem('foxtrot_cart')) || [
+      { id: 'fx-2', qty: 1 },
+      { id: 'fx-7', qty: 1 }
+    ];
+    let selectedCategory = 'All';
+    let selectedSpice = 'Medium';
+    let promoApplied = false;
+    let currentOrderFilter = 'All';
+    let adminSearchQuery = '';
+    let activeRoute = window.location.hash.toLowerCase().includes('dashboard') || window.location.search.toLowerCase().includes('dashboard')
+      ? 'dashboard'
+      : 'index';
+
+    // Safe Lucide Icon Refresher (Prevents offline/file:/// ReferenceError)
+    function refreshIcons() {
+      try {
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+          window.lucide.createIcons();
+        }
+      } catch (err) {
+        // Ignore external CDN failure when offline
+      }
+    }
+
+    // Initialize Theme
+    function initTheme() {
+      const savedTheme = localStorage.getItem('foxtrot_theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('foxtrot_theme', isDark ? 'dark' : 'light');
+    }
+
+    // =====================================================================
+    // ADMIN AUTHENTICATION GATE (ID: admin | PASS: admin)
+    // =====================================================================
+    function isAdminAuthenticated() {
+      return sessionStorage.getItem('foxtrot_admin_auth') === 'true';
+    }
+
+    function handleAdminLogin(event) {
+      if (event) event.preventDefault();
+      const idInput = document.getElementById('admin-login-id').value.trim();
+      const passInput = document.getElementById('admin-login-pass').value;
+      const errorEl = document.getElementById('admin-login-error');
+      const cardEl = document.getElementById('admin-login-card');
+
+      if (idInput === 'admin' && passInput === 'admin') {
+        errorEl.classList.add('hidden');
+        sessionStorage.setItem('foxtrot_admin_auth', 'true');
+        document.getElementById('admin-login-id').value = '';
+        document.getElementById('admin-login-pass').value = '';
+        activeRoute = 'dashboard';
+        showToast('Welcome back, Admin!');
+        renderCurrentRoute();
+      } else {
+        errorEl.classList.remove('hidden');
+        cardEl.classList.remove('animate-shake');
+        void cardEl.offsetWidth; // trigger reflow for animation replay
+        cardEl.classList.add('animate-shake');
+        refreshIcons();
+      }
+    }
+
+    function logoutAdmin() {
+      sessionStorage.removeItem('foxtrot_admin_auth');
+      toggleAdminSidebar(false);
+      activeRoute = 'dashboard';
+      showToast('Logged out of Admin Console');
+      renderCurrentRoute();
+    }
+
+    function handleAdminLogout() {
+      logoutAdmin();
+    }
+
+    function togglePasswordVisibility() {
+      const passInput = document.getElementById('admin-login-pass');
+      const eyeShow = document.getElementById('eye-show');
+      const eyeHide = document.getElementById('eye-hide');
+      if (!passInput) return;
+
+      if (passInput.type === 'password') {
+        passInput.type = 'text';
+        if (eyeShow) eyeShow.classList.add('hidden');
+        if (eyeHide) eyeHide.classList.remove('hidden');
+      } else {
+        passInput.type = 'password';
+        if (eyeShow) eyeShow.classList.remove('hidden');
+        if (eyeHide) eyeHide.classList.add('hidden');
+      }
+    }
+
+    // Dual-Page Routing (index.html <-> Admin Login Gate <-> dashboard.html)
+    function navigateTo(page, event) {
+      if (event) event.preventDefault();
+      toggleMobileNav(false);
+      toggleAdminSidebar(false);
+      activeRoute = String(page).toLowerCase().includes('dashboard') ? 'dashboard' : 'index';
+      try {
+        window.location.hash = page;
+      } catch (e) {
+        // Safe fallback on restricted file:/// environments
+      }
+      renderCurrentRoute();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Mobile Navigation Drawer Toggle for index.html
+    function toggleMobileNav(forceState) {
+      const menu = document.getElementById('mobile-nav-menu');
+      const btn = document.getElementById('mobile-menu-btn');
+      const openIcon = document.getElementById('icon-menu-open');
+      const closeIcon = document.getElementById('icon-menu-close');
+      if (!menu) return;
+
+      const isCurrentlyHidden = menu.classList.contains('hidden');
+      const shouldOpen = typeof forceState === 'boolean' ? forceState : isCurrentlyHidden;
+
+      if (shouldOpen) {
+        menu.classList.remove('hidden');
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+        if (openIcon) openIcon.classList.add('hidden');
+        if (closeIcon) closeIcon.classList.remove('hidden');
+      } else {
+        menu.classList.add('hidden');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+        if (openIcon) openIcon.classList.remove('hidden');
+        if (closeIcon) closeIcon.classList.add('hidden');
+      }
+    }
+
+    function renderCurrentRoute() {
+      const indexEl = document.getElementById('page-index');
+      const loginEl = document.getElementById('page-admin-login');
+      const dashEl = document.getElementById('page-dashboard');
+
+      if (activeRoute === 'dashboard') {
+        if (indexEl) indexEl.classList.add('hidden');
+        if (isAdminAuthenticated()) {
+          if (loginEl) loginEl.classList.add('hidden');
+          if (dashEl) dashEl.classList.remove('hidden');
+          document.title = 'Foxtrot — Admin Dashboard (dashboard.html)';
+          renderDashboard();
+        } else {
+          if (dashEl) dashEl.classList.add('hidden');
+          if (loginEl) loginEl.classList.remove('hidden');
+          document.title = 'Foxtrot — Admin Login';
+        }
+      } else {
+        if (dashEl) dashEl.classList.add('hidden');
+        if (loginEl) loginEl.classList.add('hidden');
+        if (indexEl) indexEl.classList.remove('hidden');
+        document.title = 'Foxtrot — Artisanal Bistro, Grill & Cafe (index.html)';
+        renderLandingPage();
+      }
+      refreshIcons();
+    }
+
+    function syncRouteFromHash() {
+      const hash = window.location.hash.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      if (hash.includes('dashboard') || search.includes('dashboard')) {
+        activeRoute = 'dashboard';
+      } else if (hash.includes('index')) {
+        activeRoute = 'index';
+      }
+      renderCurrentRoute();
+    }
+
+    window.addEventListener('hashchange', syncRouteFromHash);
+
+    // Toast Helper
+    function showToast(message) {
+      const box = document.getElementById('toast-box');
+      if (!box) return;
+      const toast = document.createElement('div');
+      toast.className =
+        'px-4 py-3 rounded-2xl bg-[#141518] dark:bg-white text-white dark:text-[#141518] text-xs sm:text-sm font-bold shadow-xl border border-stone-700/40 flex items-center gap-2 transition-all';
+      toast.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#D94E28]"></span><span>${message}</span>`;
+      box.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 2800);
+    }
+
+    // =====================================================================
+    // LANDING PAGE (INDEX.HTML) RENDER & LOGIC
+    // =====================================================================
+    function renderLandingPage() {
+      renderCategoryPills();
+      renderMenuGrid();
+      renderCart();
+    }
+
+    function setSpice(level) {
+      selectedSpice = level;
+      const spiceLabel = document.getElementById('cart-spice-label');
+      if (spiceLabel) spiceLabel.textContent = level;
+      document.querySelectorAll('.spice-btn').forEach((btn) => {
+        if (btn.dataset.spice === level) {
+          btn.className = 'spice-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-[#D94E28] text-white shadow-xs transition-all';
+        } else {
+          btn.className = 'spice-btn px-3 py-1.5 rounded-lg text-xs font-bold text-stone-600 dark:text-gray-300 transition-all';
+        }
+      });
+      showToast(`Spice preference set to ${level}`);
+    }
+
+    function renderCategoryPills() {
+      const categories = ['All', 'Wood-Fired Grills', 'Artisan Mains', 'Platters', 'Craft Drinks & Desserts'];
+      const container = document.getElementById('category-pills');
+      if (!container) return;
+      container.innerHTML = categories
+        .map((cat) => {
+          const active = cat === selectedCategory;
+          return `
+            <button
+              type="button"
+              onclick="selectCategory('${cat}')"
+              class="shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all ${
+                active
+                  ? 'bg-[#D94E28] text-white shadow-md shadow-[#D94E28]/20'
+                  : 'bg-[#F7F7F5] dark:bg-[#181B20] text-stone-700 dark:text-gray-300 hover:bg-stone-200 dark:hover:bg-gray-800 border border-stone-200/80 dark:border-gray-800'
+              }"
+            >
+              ${cat}
+            </button>
+          `;
+        })
+        .join('');
+    }
+
+    function selectCategory(cat) {
+      selectedCategory = cat;
+      renderCategoryPills();
+      renderMenuGrid();
+    }
+
+    function renderMenuGrid() {
+      const grid = document.getElementById('menu-grid');
+      if (!grid) return;
+      const filtered =
+        selectedCategory === 'All'
+          ? menuItems
+          : menuItems.filter((item) => item.category === selectedCategory);
+
+      grid.innerHTML = filtered
+        .map(
+          (item) => `
+          <div class="group rounded-3xl bg-[#F7F7F5] dark:bg-[#181B20] border border-stone-200/80 dark:border-gray-800 overflow-hidden flex flex-col justify-between hover:border-[#D94E28]/60 hover:shadow-xl transition-all duration-300">
+            <div>
+              <div class="relative h-52 bg-stone-200 dark:bg-gray-900 overflow-hidden">
+                <img
+                  src="${item.image}"
+                  alt="${item.name}"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="hidden w-full h-full bg-gradient-to-br from-[#2A1610] to-[#D94E28] items-center justify-center text-white font-extrabold text-lg p-4 text-center">
+                  ${item.name}
+                </div>
+                <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-white/95 dark:bg-[#0F1115]/90 text-[11px] font-extrabold text-[#D94E28] shadow-xs">
+                  ${item.badge}
+                </span>
+              </div>
+
+              <div class="p-6 pb-4">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-stone-400">${item.category}</span>
+                <h3 class="text-lg font-extrabold mt-1 leading-snug">${item.name}</h3>
+                <p class="text-xs font-semibold text-[#D94E28] mt-0.5">${item.tagline || ''}</p>
+                <p class="text-xs sm:text-sm text-stone-600 dark:text-gray-400 mt-2.5 leading-relaxed">
+                  ${item.desc}
+                </p>
+              </div>
+            </div>
+
+            <div class="px-6 pb-6 pt-3 flex items-center justify-between border-t border-stone-200/60 dark:border-gray-800/60">
+              <div>
+                <span class="text-[11px] text-stone-400 block">Price</span>
+                <span class="text-xl font-extrabold">৳${item.price.toLocaleString()}</span>
+              </div>
+              <button
+                type="button"
+                onclick="addToCart('${item.id}')"
+                class="px-4 py-2.5 rounded-xl bg-[#141518] dark:bg-white text-white dark:text-[#141518] hover:bg-[#D94E28] dark:hover:bg-[#D94E28] dark:hover:text-white text-xs font-bold transition-colors inline-flex items-center gap-1.5"
+              >
+                <span>+ Add to Cart</span>
+              </button>
+            </div>
+          </div>
+        `
+        )
+        .join('');
+    }
+
+    // Cart Management
+    function saveCart() {
+      localStorage.setItem('foxtrot_cart', JSON.stringify(cart));
+    }
+
+    function addToCart(id) {
+      const found = cart.find((c) => c.id === id);
+      if (found) {
+        found.qty += 1;
+      } else {
+        cart.push({ id, qty: 1 });
+      }
+      saveCart();
+      renderCart();
+      const item = menuItems.find((m) => m.id === id);
+      showToast(`Added "${item ? item.name : 'Dish'}" to cart`);
+    }
+
+    function updateCartQty(id, delta) {
+      const idx = cart.findIndex((c) => c.id === id);
+      if (idx === -1) return;
+      cart[idx].qty += delta;
+      if (cart[idx].qty <= 0) {
+        cart.splice(idx, 1);
+      }
+      saveCart();
+      renderCart();
+    }
+
+    function toggleCartDrawer(open) {
+      const drawer = document.getElementById('cart-drawer');
+      const backdrop = document.getElementById('cart-drawer-backdrop');
+      if (!drawer || !backdrop) return;
+      if (open) {
+        backdrop.classList.remove('hidden');
+        drawer.classList.remove('translate-x-full');
+      } else {
+        backdrop.classList.add('hidden');
+        drawer.classList.add('translate-x-full');
+      }
+    }
+
+    function copyPromoCode() {
+      const temp = document.createElement('textarea');
+      temp.value = 'FOXTROT20';
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+
+      const label = document.getElementById('copy-promo-label');
+      if (label) label.textContent = 'Copied!';
+      showToast('Promo code FOXTROT20 copied!');
+      setTimeout(() => {
+        if (label) label.textContent = 'Copy Code';
+      }, 2000);
+    }
+
+    function applyPromoCode() {
+      const input = document.getElementById('promo-input').value.trim().toUpperCase();
+      const msgEl = document.getElementById('promo-status-msg');
+      msgEl.classList.remove('hidden');
+
+      if (input === 'FOXTROT20') {
+        promoApplied = true;
+        msgEl.textContent = '✓ FOXTROT20 applied! 20% discount unlocked.';
+        msgEl.className = 'text-xs font-bold text-emerald-600 dark:text-emerald-400';
+        showToast('20% Promo Discount Applied!');
+      } else {
+        promoApplied = false;
+        msgEl.textContent = 'Invalid code. Try FOXTROT20 for 20% off.';
+        msgEl.className = 'text-xs font-bold text-rose-500';
+      }
+      renderCart();
+    }
+
+    function renderCart() {
+      const totalItems = cart.reduce((sum, c) => sum + c.qty, 0);
+      const badge = document.getElementById('nav-cart-badge');
+      if (badge) badge.textContent = totalItems;
+
+      const container = document.getElementById('cart-items-container');
+      if (!container) return;
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-10 px-4 rounded-2xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-dashed border-stone-300 dark:border-gray-800">
+            <p class="text-sm font-bold">Your cart is empty</p>
+            <p class="text-xs text-stone-500 mt-1">Select signature steaks or platters from the menu.</p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = cart
+          .map((entry) => {
+            const item = menuItems.find((m) => m.id === entry.id);
+            if (!item) return '';
+            return `
+              <div class="p-3.5 rounded-2xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200/80 dark:border-gray-800 flex items-center justify-between gap-3">
+                <div class="min-w-0">
+                  <p class="text-sm font-bold truncate">${item.name}</p>
+                  <p class="text-xs font-semibold text-[#D94E28]">৳${(item.price * entry.qty).toLocaleString()}</p>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                  <button type="button" onclick="updateCartQty('${item.id}', -1)" class="w-7 h-7 rounded-lg bg-white dark:bg-[#181B20] border border-stone-200 dark:border-gray-700 font-bold text-sm hover:border-[#D94E28]">−</button>
+                  <span class="text-xs font-extrabold w-5 text-center">${entry.qty}</span>
+                  <button type="button" onclick="updateCartQty('${item.id}', 1)" class="w-7 h-7 rounded-lg bg-white dark:bg-[#181B20] border border-stone-200 dark:border-gray-700 font-bold text-sm hover:border-[#D94E28]">+</button>
+                </div>
+              </div>
+            `;
+          })
+          .join('');
+      }
+
+      const subtotal = cart.reduce((sum, entry) => {
+        const item = menuItems.find((m) => m.id === entry.id);
+        return sum + (item ? item.price * entry.qty : 0);
+      }, 0);
+
+      const discount = promoApplied ? Math.round(subtotal * 0.2) : 0;
+      const delivery = subtotal === 0 ? 0 : subtotal >= 1500 ? 0 : 60;
+      const total = Math.max(0, subtotal - discount + delivery);
+
+      document.getElementById('cart-subtotal').textContent = `৳${subtotal.toLocaleString()}`;
+      const discountRow = document.getElementById('cart-discount-row');
+      if (discount > 0) {
+        discountRow.classList.remove('hidden');
+        document.getElementById('cart-discount').textContent = `-৳${discount.toLocaleString()}`;
+      } else {
+        discountRow.classList.add('hidden');
+      }
+      document.getElementById('cart-delivery').textContent = delivery === 0 && subtotal > 0 ? 'FREE' : `৳${delivery}`;
+      document.getElementById('cart-total').textContent = `৳${total.toLocaleString()}`;
+    }
+
+    function handleCheckout(event) {
+      event.preventDefault();
+      if (cart.length === 0) {
+        showToast('Please add at least one item to your cart.');
+        return;
+      }
+
+      const name = document.getElementById('cust-name').value.trim();
+      const phone = document.getElementById('cust-phone').value.trim();
+      const area = document.getElementById('cust-area').value;
+
+      const subtotal = cart.reduce((sum, entry) => {
+        const item = menuItems.find((m) => m.id === entry.id);
+        return sum + (item ? item.price * entry.qty : 0);
+      }, 0);
+      const discount = promoApplied ? Math.round(subtotal * 0.2) : 0;
+      const delivery = subtotal >= 1500 ? 0 : 60;
+      const total = subtotal - discount + delivery;
+
+      const itemsText =
+        cart
+          .map((entry) => {
+            const item = menuItems.find((m) => m.id === entry.id);
+            return item ? `${item.name} (${entry.qty}x)` : '';
+          })
+          .filter(Boolean)
+          .join(', ') + ` [${selectedSpice}]`;
+
+      const nextNum = 5108 + orders.length;
+      const newOrder = {
+        id: `#FX-${nextNum}`,
+        customer: name,
+        phone: phone,
+        area: area,
+        items: itemsText,
+        total: total,
+        dateTime: '26 Nov 2026, Just Now',
+        status: 'Pending'
+      };
+
+      orders.unshift(newOrder);
+      localStorage.setItem('foxtrot_orders', JSON.stringify(orders));
+
+      // Clear cart
+      cart = [];
+      promoApplied = false;
+      saveCart();
+      renderCart();
+      toggleCartDrawer(false);
+
+      // Show Receipt Modal
+      document.getElementById('receipt-order-id').textContent = newOrder.id;
+      document.getElementById('receipt-summary').innerHTML = `
+        <p><strong>Guest:</strong> ${newOrder.customer} (${newOrder.phone})</p>
+        <p><strong>Area:</strong> ${newOrder.area}, Dhaka</p>
+        <p><strong>Items:</strong> ${newOrder.items}</p>
+        <p class="pt-1 text-sm font-extrabold text-[#D94E28]">Total Payable: ৳${newOrder.total.toLocaleString()}</p>
+      `;
+      const modal = document.getElementById('receipt-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      refreshIcons();
+    }
+
+    function closeReceiptModal() {
+      const modal = document.getElementById('receipt-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function closeReceiptAndGoAdmin(event) {
+      closeReceiptModal();
+      navigateTo('dashboard.html', event);
+    }
+
+    // =====================================================================
+    // ADMIN DASHBOARD (DASHBOARD.HTML) RENDER & LOGIC
+    // =====================================================================
+    function renderDashboard() {
+      updateKPIs();
+      renderWeeklyChart();
+      renderOrdersTables();
+      renderTopProducts();
+      renderAdminProducts();
+      renderAdminCustomers();
+      renderNotifications();
+    }
+
+    function toggleAdminSidebar(open) {
+      const sidebar = document.getElementById('admin-sidebar');
+      const backdrop = document.getElementById('sidebar-backdrop');
+      if (!sidebar || !backdrop) return;
+      if (open) {
+        backdrop.classList.remove('hidden');
+        sidebar.classList.remove('-translate-x-full');
+        sidebar.classList.add('translate-x-0');
+      } else {
+        backdrop.classList.add('hidden');
+        sidebar.classList.remove('translate-x-0');
+        sidebar.classList.add('-translate-x-full');
+      }
+    }
+
+    function switchAdminTab(tabName) {
+      document.querySelectorAll('.admin-tab-panel').forEach((panel) => panel.classList.add('hidden'));
+      const activePanel = document.getElementById(`admin-tab-${tabName}`);
+      if (activePanel) activePanel.classList.remove('hidden');
+
+      document.querySelectorAll('.admin-nav-btn').forEach((btn) => {
+        if (btn.dataset.tab === tabName) {
+          btn.className = 'admin-nav-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-bold bg-[#D94E28] text-white shadow-sm';
+        } else {
+          btn.className = 'admin-nav-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold text-stone-600 dark:text-gray-300 hover:bg-stone-100 dark:hover:bg-gray-800';
+        }
+      });
+
+      toggleAdminSidebar(false);
+    }
+
+    function toggleNotifDropdown() {
+      const dd = document.getElementById('notif-dropdown');
+      dd.classList.toggle('hidden');
+      document.getElementById('notif-dot').classList.add('hidden');
+    }
+
+    function renderNotifications() {
+      const list = document.getElementById('notif-list');
+      list.innerHTML = orders
+        .slice(0, 3)
+        .map(
+          (o) => `
+          <div class="p-2.5 rounded-xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200/70 dark:border-gray-800">
+            <div class="flex justify-between font-bold">
+              <span class="text-[#D94E28]">${o.id}</span>
+              <span>৳${o.total.toLocaleString()}</span>
+            </div>
+            <p class="font-semibold mt-0.5">${o.customer} • ${o.area}</p>
+            <p class="text-[11px] text-stone-500 truncate">${o.items}</p>
+          </div>
+        `
+        )
+        .join('');
+    }
+
+    function updateKPIs() {
+      const baseSales = 65370;
+      const liveOrdersTotal = orders
+        .filter((o) => o.status !== 'Cancelled')
+        .reduce((sum, o) => sum + o.total, 0);
+      const totalSales = baseSales + liveOrdersTotal;
+
+      const totalOrdersCount = 126 + orders.length;
+      const pendingCount = orders.filter((o) => o.status === 'Pending').length;
+      const uniqueCustomers = 32 + orders.length;
+
+      document.getElementById('kpi-sales').textContent = `৳${totalSales.toLocaleString()}`;
+      document.getElementById('kpi-orders').textContent = totalOrdersCount;
+      document.getElementById('kpi-customers').textContent = uniqueCustomers;
+      document.getElementById('kpi-pending').textContent = pendingCount;
+      document.getElementById('sidebar-pending-badge').textContent = pendingCount;
+    }
+
+    function renderWeeklyChart() {
+      const container = document.getElementById('weekly-chart');
+      const maxVal = Math.max(...WEEKLY_REVENUE.map((d) => d.amount));
+
+      container.innerHTML = WEEKLY_REVENUE.map((item) => {
+        const heightPercent = Math.round((item.amount / maxVal) * 100);
+        const isPeak = item.amount === maxVal;
+        return `
+          <div class="flex flex-col items-center h-full justify-end group">
+            <span class="text-[10px] sm:text-xs font-bold mb-2 opacity-0 group-hover:opacity-100 transition-opacity text-[#D94E28]">
+              ৳${(item.amount / 1000).toFixed(1)}k
+            </span>
+            <div class="w-full max-w-[44px] bg-stone-100 dark:bg-[#0F1115] rounded-2xl h-40 flex items-end overflow-hidden p-1">
+              <div
+                style="height: ${heightPercent}%"
+                class="w-full rounded-xl transition-all duration-500 ${
+                  isPeak
+                    ? 'bg-[#D94E28]'
+                    : 'bg-stone-800 dark:bg-stone-600 group-hover:bg-[#D94E28]'
+                }"
+              ></div>
+            </div>
+            <span class="text-xs font-bold mt-2.5 ${isPeak ? 'text-[#D94E28]' : 'text-stone-500 dark:text-gray-400'}">
+              ${item.day}
+            </span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function setOrderFilter(filter) {
+      currentOrderFilter = filter;
+      document.querySelectorAll('.order-filter-btn').forEach((btn) => {
+        if (btn.dataset.filter === filter) {
+          btn.className = 'order-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-[#D94E28] text-white';
+        } else {
+          btn.className = 'order-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold text-stone-600 dark:text-gray-300';
+        }
+      });
+      renderOrdersTables();
+    }
+
+    function handleAdminSearch(query) {
+      adminSearchQuery = query.toLowerCase().trim();
+      renderOrdersTables();
+      renderAdminProducts();
+    }
+
+    function cycleOrderStatus(orderId) {
+      const order = orders.find((o) => o.id === orderId);
+      if (!order) return;
+      const sequence = ['Pending', 'Delivered', 'Cancelled'];
+      const nextIdx = (sequence.indexOf(order.status) + 1) % sequence.length;
+      order.status = sequence[nextIdx];
+      localStorage.setItem('foxtrot_orders', JSON.stringify(orders));
+      updateKPIs();
+      renderOrdersTables();
+      showToast(`Order ${order.id} marked as ${order.status}`);
+    }
+
+    function getStatusBadgeHTML(status, orderId) {
+      const styles = {
+        Pending: 'bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30',
+        Delivered: 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30',
+        Cancelled: 'bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30'
+      };
+      return `
+        <button
+          onclick="cycleOrderStatus('${orderId}')"
+          title="Click to change status"
+          class="px-3 py-1 rounded-full text-xs font-extrabold border ${styles[status] || ''} hover:scale-105 transition-transform"
+        >
+          ${status}
+        </button>
+      `;
+    }
+
+    function renderOrdersTables() {
+      const filtered = orders.filter((o) => {
+        const matchesTab = currentOrderFilter === 'All' || o.status === currentOrderFilter;
+        const matchesSearch =
+          !adminSearchQuery ||
+          o.id.toLowerCase().includes(adminSearchQuery) ||
+          o.customer.toLowerCase().includes(adminSearchQuery) ||
+          o.items.toLowerCase().includes(adminSearchQuery) ||
+          o.area.toLowerCase().includes(adminSearchQuery);
+        return matchesTab && matchesSearch;
+      });
+
+      const rowsHTML = filtered
+        .map(
+          (o) => `
+          <tr class="hover:bg-stone-50/80 dark:hover:bg-white/[0.02] transition-colors">
+            <td class="py-4 px-4 font-extrabold text-[#D94E28] whitespace-nowrap">${o.id}</td>
+            <td class="py-4 px-4">
+              <p class="font-bold">${o.customer}</p>
+              <p class="text-xs text-stone-500 dark:text-gray-400">${o.area} • ${o.phone}</p>
+            </td>
+            <td class="py-4 px-4 max-w-xs">
+              <p class="text-xs sm:text-sm text-stone-700 dark:text-gray-300 line-clamp-2">${o.items}</p>
+            </td>
+            <td class="py-4 px-4 font-extrabold whitespace-nowrap">৳${o.total.toLocaleString()}</td>
+            <td class="py-4 px-4 text-xs text-stone-500 dark:text-gray-400 whitespace-nowrap">${o.dateTime}</td>
+            <td class="py-4 px-4 whitespace-nowrap">${getStatusBadgeHTML(o.status, o.id)}</td>
+          </tr>
+        `
+        )
+        .join('');
+
+      const emptyRow = `<tr><td colspan="6" class="py-8 text-center text-sm text-stone-500">No matching orders found.</td></tr>`;
+
+      document.getElementById('recent-orders-tbody').innerHTML = rowsHTML || emptyRow;
+      document.getElementById('full-orders-tbody').innerHTML = rowsHTML || emptyRow;
+    }
+
+    function renderTopProducts() {
+      const top = [...menuItems].sort((a, b) => b.soldToday - a.soldToday).slice(0, 4);
+      document.getElementById('top-products-list').innerHTML = top
+        .map(
+          (item, index) => `
+          <div class="flex items-center justify-between gap-4 p-3.5 rounded-2xl bg-[#F7F7F5] dark:bg-[#0F1115] border border-stone-200/70 dark:border-gray-800">
+            <div class="flex items-center gap-3 min-w-0">
+              <span class="w-7 h-7 rounded-lg bg-[#D94E28]/15 text-[#D94E28] font-extrabold text-xs flex items-center justify-center shrink-0">
+                #${index + 1}
+              </span>
+              <div class="min-w-0">
+                <p class="text-sm font-bold truncate">${item.name}</p>
+                <p class="text-xs text-stone-500 dark:text-gray-400">${item.soldToday} orders today</p>
+              </div>
+            </div>
+            <span class="text-sm font-extrabold shrink-0">৳${(item.price * item.soldToday).toLocaleString()}</span>
+          </div>
+        `
+        )
+        .join('');
+    }
+
+    function renderAdminProducts() {
+      const filtered = menuItems.filter(
+        (m) =>
+          !adminSearchQuery ||
+          m.name.toLowerCase().includes(adminSearchQuery) ||
+          m.category.toLowerCase().includes(adminSearchQuery)
+      );
+
+      document.getElementById('admin-products-grid').innerHTML = filtered
+        .map(
+          (item) => `
+          <div class="p-5 rounded-3xl bg-white dark:bg-[#181B20] border border-stone-200 dark:border-gray-800 flex flex-col justify-between gap-4">
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-[#D94E28]">${item.category}</span>
+              <h4 class="font-extrabold text-base mt-1">${item.name}</h4>
+              <p class="text-xs text-stone-500 mt-0.5">${item.tagline || item.desc}</p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-stone-100 dark:border-gray-800">
+              <span class="text-lg font-extrabold">৳${item.price.toLocaleString()}</span>
+              <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">● Active on index.html</span>
+            </div>
+          </div>
+        `
+        )
+        .join('');
+    }
+
+    function handleAddProduct(event) {
+      event.preventDefault();
+      const name = document.getElementById('new-dish-name').value.trim();
+      const tagline = document.getElementById('new-dish-tagline').value.trim();
+      const category = document.getElementById('new-dish-cat').value;
+      const price = parseInt(document.getElementById('new-dish-price').value, 10);
+
+      const newItem = {
+        id: 'fx-' + Date.now(),
+        name,
+        tagline,
+        category,
+        price,
+        desc: 'Freshly introduced specialty from Foxtrot Banani kitchen.',
+        badge: 'New Arrival',
+        image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',
+        soldToday: 1
+      };
+
+      menuItems.unshift(newItem);
+      localStorage.setItem('foxtrot_menu', JSON.stringify(menuItems));
+      event.target.reset();
+      renderAdminProducts();
+      renderTopProducts();
+      showToast(`"${name}" added to Foxtrot Menu!`);
+    }
+
+    function renderAdminCustomers() {
+      const container = document.getElementById('admin-customers-grid');
+      container.innerHTML = orders
+        .map(
+          (o) => `
+          <div class="p-5 rounded-3xl bg-white dark:bg-[#181B20] border border-stone-200 dark:border-gray-800 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-extrabold text-base">${o.customer}</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-[#D94E28]/10 text-[#D94E28] text-xs font-bold">${o.area}</span>
+            </div>
+            <p class="text-xs text-stone-500 dark:text-gray-400">Phone: ${o.phone}</p>
+            <p class="text-xs font-semibold pt-2 border-t border-stone-100 dark:border-gray-800">
+              Latest Order: <span class="text-[#D94E28]">${o.id}</span> • ৳${o.total.toLocaleString()}
+            </p>
+          </div>
+        `
+        )
+        .join('');
+    }
+
+    function resetDemoData() {
+      localStorage.removeItem('foxtrot_orders');
+      localStorage.removeItem('foxtrot_menu');
+      localStorage.removeItem('foxtrot_cart');
+      orders = [...DEFAULT_ORDERS];
+      menuItems = [...DEFAULT_MENU];
+      cart = [{ id: 'fx-2', qty: 1 }];
+      renderDashboard();
+      showToast('Demo data restored to defaults.');
+    }
+
+    // Boot Application
+    initTheme();
+    syncRouteFromHash();
+  </script>
+</body>
+</html>
